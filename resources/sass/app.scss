@@ -1,0 +1,64 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    margin: 0;
+  }
+  
+  li {
+    list-style: none;
+    margin-bottom: 10px;
+  }
+  
+  button, input {
+    border: 1px solid black;
+    padding: 0 5px;
+    margin: 5px;
+  }
+  
+  span {
+    display: inline-block;
+    margin: 5px;
+  }
+  
+  .container {
+    margin: 0 auto;
+    width: 95%;
+    max-width: 900px;
+  }
+  
+  .done {
+    opacity: 0.3;
+  }
+  
+  .header {
+    text-align: center;
+    background-color: #000066;
+    margin-bottom: 50px;
+  }
+  
+  .header_nav {
+    padding: 30px;
+  }
+  
+  .header_nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    margin-right: 25px;
+  }
+  
+  .header_nav a:last-child {
+    margin-right: 0;
+  }
+  
+  .header_nav a.router-link-active {
+    color: #f3920b !important;
+  }
+  
