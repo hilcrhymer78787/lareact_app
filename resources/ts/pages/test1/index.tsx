@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../../../sass/app.scss';
 import axios from 'axios';
 
 type TaskType = {
@@ -10,7 +9,7 @@ type TaskType = {
 
 const initialState: TaskType[] = []
 
-const Task: React.FC = () => {
+const Test1: React.FC = () => {
 
     const [tasks, setTasks] = useState(initialState)
     const [inputTitle, setInputTitle] = useState('')
@@ -83,5 +82,4 @@ const Task: React.FC = () => {
     );
 }
 
-
-export default Task;
+export default Test1;

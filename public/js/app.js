@@ -1963,42 +1963,75 @@ var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_m
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var index_1 = __importDefault(__webpack_require__(/*! ./pages/tasks/index */ "./resources/ts/pages/tasks/index.tsx"));
+var index_1 = __importDefault(__webpack_require__(/*! ./pages/test1/index */ "./resources/ts/pages/test1/index.tsx"));
 
-var index_2 = __importDefault(__webpack_require__(/*! ./pages/search/index */ "./resources/ts/pages/search/index.tsx"));
+var index_2 = __importDefault(__webpack_require__(/*! ./pages/test2/index */ "./resources/ts/pages/test2/index.tsx"));
 
-var index_3 = __importDefault(__webpack_require__(/*! ./pages/user/index */ "./resources/ts/pages/user/index.tsx"));
+var index_3 = __importDefault(__webpack_require__(/*! ./pages/test3/index */ "./resources/ts/pages/test3/index.tsx"));
+
+var index_4 = __importDefault(__webpack_require__(/*! ./pages/user/index */ "./resources/ts/pages/user/index.tsx"));
+
+var index_5 = __importDefault(__webpack_require__(/*! ./pages/place/index */ "./resources/ts/pages/place/index.tsx"));
 
 var App = function App() {
-  return react_1["default"].createElement("div", null, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", {
+  return react_1["default"].createElement("div", null, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement("div", null, react_1["default"].createElement("ul", {
+    className: "hamburger"
+  }, react_1["default"].createElement("li", {
+    className: "hamburger_icn"
+  }), react_1["default"].createElement("li", {
+    className: "hamburger_icn"
+  }), react_1["default"].createElement("li", {
+    className: "hamburger_icn"
+  })), react_1["default"].createElement("div", {
     className: "header"
   }, react_1["default"].createElement("div", {
-    className: "header_nav"
+    className: "container"
+  }, react_1["default"].createElement("div", {
+    className: "d-flex align-items-center justify-content-center"
+  }, react_1["default"].createElement("img", {
+    className: "header_img",
+    src: "/assets/noimage.png"
+  }), react_1["default"].createElement("div", {
+    className: "header_left"
+  }, react_1["default"].createElement("p", null, "logintest3.name"), react_1["default"].createElement("a", {
+    href: "/logout"
+  }, "\u30ED\u30B0\u30A2\u30A6\u30C8"))), react_1["default"].createElement("div", {
+    className: "header_nav d-md-flex justify-content-center"
   }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/web/task"
-  }, "Task"), react_1["default"].createElement(react_router_dom_1.Link, {
-    to: "/web/search"
-  }, "Search"), react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/web/user"
-  }, "User"))), react_1["default"].createElement("div", {
+  }, "user"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/web/place"
+  }, "place"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/web/test1"
+  }, "test1"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/web/test2"
+  }, "test2"), react_1["default"].createElement(react_router_dom_1.Link, {
+    to: "/web/test3"
+  }, "test3")))), react_1["default"].createElement("div", {
+    className: "dammyHeader"
+  })), react_1["default"].createElement("div", {
     className: "container"
   }, react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/web/search"
+    path: "/web/test1"
+  }, react_1["default"].createElement(index_1["default"], null)), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: "/web/test2"
   }, react_1["default"].createElement(index_2["default"], null)), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/web/user"
+    path: "/web/test3"
   }, react_1["default"].createElement(index_3["default"], null)), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/web/task"
-  }, react_1["default"].createElement(index_1["default"], null))))));
+    path: "/web/user"
+  }, react_1["default"].createElement(index_4["default"], null)), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: "/web/place"
+  }, react_1["default"].createElement(index_5["default"], null))))));
 };
 
 react_dom_1["default"].render(react_1["default"].createElement(App, null), document.getElementById('approot'));
 
 /***/ }),
 
-/***/ "./resources/ts/pages/search/index.tsx":
-/*!*********************************************!*\
-  !*** ./resources/ts/pages/search/index.tsx ***!
-  \*********************************************/
+/***/ "./resources/ts/pages/place/index.tsx":
+/*!********************************************!*\
+  !*** ./resources/ts/pages/place/index.tsx ***!
+  \********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -2013,45 +2046,13 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var loadingIcon_1 = __importDefault(__webpack_require__(/*! ./loadingIcon */ "./resources/ts/pages/search/loadingIcon.tsx"));
-
-var Search = function Search() {
-  return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, "Search"), react_1["default"].createElement(loadingIcon_1["default"], null));
-};
-
-exports.default = Search;
-
-/***/ }),
-
-/***/ "./resources/ts/pages/search/loadingIcon.tsx":
-/*!***************************************************!*\
-  !*** ./resources/ts/pages/search/loadingIcon.tsx ***!
-  \***************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.loadingIcon = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_loading_1 = __importDefault(__webpack_require__(/*! react-loading */ "./node_modules/react-loading/dist/react-loading.js"));
 
-var loadingIcon = function loadingIcon() {
-  return react_1["default"].createElement("div", null, react_1["default"].createElement(react_loading_1["default"], {
+var Place = function Place() {
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, "Place"), react_1["default"].createElement(react_loading_1["default"], {
     type: "spin",
     color: "black",
     height: 100,
@@ -2059,14 +2060,13 @@ var loadingIcon = function loadingIcon() {
   }));
 };
 
-exports.loadingIcon = loadingIcon;
-exports.default = exports.loadingIcon;
+exports.default = Place;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/tasks/index.tsx":
+/***/ "./resources/ts/pages/test1/index.tsx":
 /*!********************************************!*\
-  !*** ./resources/ts/pages/tasks/index.tsx ***!
+  !*** ./resources/ts/pages/test1/index.tsx ***!
   \********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -2135,13 +2135,11 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-__webpack_require__(/*! ../../../sass/app.scss */ "./resources/sass/app.scss");
-
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var initialState = [];
 
-var Task = function Task() {
+var Test1 = function Test1() {
   var _a = react_1.useState(initialState),
       tasks = _a[0],
       setTasks = _a[1];
@@ -2224,14 +2222,50 @@ var Task = function Task() {
   }))));
 };
 
-exports.default = Task;
+exports.default = Test1;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/user/index.tsx":
-/*!*******************************************!*\
-  !*** ./resources/ts/pages/user/index.tsx ***!
-  \*******************************************/
+/***/ "./resources/ts/pages/test2/index.tsx":
+/*!********************************************!*\
+  !*** ./resources/ts/pages/test2/index.tsx ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_loading_1 = __importDefault(__webpack_require__(/*! react-loading */ "./node_modules/react-loading/dist/react-loading.js"));
+
+var Test2 = function Test2() {
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, "Search"), react_1["default"].createElement(react_loading_1["default"], {
+    type: "spin",
+    color: "black",
+    height: 100,
+    width: 100
+  }));
+};
+
+exports.default = Test2;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/test3/index.tsx":
+/*!********************************************!*\
+  !*** ./resources/ts/pages/test3/index.tsx ***!
+  \********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -2290,7 +2324,7 @@ var userDefault = {
   email: "noemail"
 };
 
-var User = function User() {
+var Test3 = function Test3() {
   var _a = react_1.useState(userDefault),
       user = _a[0],
       setuser = _a[1];
@@ -2307,6 +2341,76 @@ var User = function User() {
   return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, "User"), "\u79C1\u306E\u540D\u524D\u306F", react_1["default"].createElement("span", null, user.name), react_1["default"].createElement("br", null), "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F", react_1["default"].createElement("span", null, user.email), react_1["default"].createElement("br", null), react_1["default"].createElement("br", null), react_1["default"].createElement("a", {
     href: "/logout"
   }, "\u30ED\u30B0\u30A2\u30A6\u30C8"));
+};
+
+exports.default = Test3;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/user/index.tsx":
+/*!*******************************************!*\
+  !*** ./resources/ts/pages/user/index.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var User = function User() {
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: "cmn_pageTitle"
+  }, "\u51FA\u52E4\u8005\u4E00\u89A7"), react_1["default"].createElement("div", {
+    "v-show": "isShow",
+    className: "table"
+  }, react_1["default"].createElement("ul", {
+    className: "table_row ar"
+  }, react_1["default"].createElement("li", {
+    className: "table_row_list img_name pl-2"
+  }, "\u753B\u50CF"), react_1["default"].createElement("li", {
+    className: "table_row_list name"
+  }, "\u540D\u524D"), react_1["default"].createElement("li", {
+    className: "table_row_list email d-none d-md-block"
+  }, "\u30E1\u30FC\u30EB"), react_1["default"].createElement("li", {
+    className: "table_row_list btn"
+  }, "\u3000")), react_1["default"].createElement("ul", {
+    "v-for": "user in users",
+    className: "table_row"
+  }, react_1["default"].createElement("li", {
+    className: "table_row_list img_name"
+  }, react_1["default"].createElement("img", {
+    "v-if": "user.img_name"
+  }), react_1["default"].createElement("img", {
+    "v-if": "!user.img_name",
+    src: "/assets/noimage.png"
+  })), react_1["default"].createElement("li", {
+    className: "table_row_list name"
+  }, "user.name"), react_1["default"].createElement("li", {
+    className: "table_row_list email d-none d-md-block"
+  }, "user.email"), react_1["default"].createElement("li", {
+    className: "table_row_list btn"
+  }, react_1["default"].createElement("button", {
+    className: "cmn_btn_sub mr-1"
+  }, "\u7DE8\u96C6"), react_1["default"].createElement("button", {
+    className: "cmn_btn_delete"
+  }, "\u524A\u9664")))), react_1["default"].createElement("div", {
+    className: "footbar"
+  }, react_1["default"].createElement("div", {
+    className: "container"
+  }, react_1["default"].createElement("button", {
+    className: "footbar_btn"
+  }, "\u65B0\u898F\u767B\u9332"))));
 };
 
 exports.default = User;
