@@ -18,7 +18,7 @@ const userDefault: userType = {
     salary: "",
 }
 
-const UserCreate: React.FC = ({setIsLoadingTrue, setIsLoadingFalse}:any) => {
+const UserCreate: React.FC = ({setIsLoading, getUsers, setIsCreate}:any) => {
 
     const inputRef: any = React.useRef()
 
@@ -60,8 +60,7 @@ const UserCreate: React.FC = ({setIsLoadingTrue, setIsLoadingFalse}:any) => {
         }
 
         
-        setIsLoadingTrue();
-        // this.$parent.loading = true;
+        setIsLoading(true)
         let postData = new FormData()
         postData.append("file", file)
         postData.append("img_name", img_name)
@@ -73,28 +72,20 @@ const UserCreate: React.FC = ({setIsLoadingTrue, setIsLoadingFalse}:any) => {
             .post("/api/users", postData)
             .then((res) => {
                 console.log(res.data)
-                setIsLoadingFalse();
-                // this.$parent.editmodal = false;
-                // this.$parent.getusers();
-                // this.$parent.loading = false;
+                setIsLoading(false);
+                getUsers()
+                setIsCreate(false)
             })
             .catch((res) => {
                 alert("エラーです");
-                // this.$parent.loading = false;
-                setIsLoadingFalse();
-            });
+                setIsLoading(false);
+            })
 
     }
     useEffect(() => {
     }, [])
 
     return (
-        <div className="">
-        <button onClick={setIsLoadingTrue}>おん</button>
-        <br />
-        <br />
-        <button onClick={setIsLoadingFalse}>おふ</button>
-
         <form onSubmit={submit} className="form">
             <div className="form_ttl">出勤者登録</div>
             <ul className="form_list">
@@ -130,8 +121,6 @@ const UserCreate: React.FC = ({setIsLoadingTrue, setIsLoadingFalse}:any) => {
                 <button type="submit" className="cmn_btn_sub">新規登録</button>
             </div>
         </form>
-        </div>
-
     )
 }
 

@@ -2453,14 +2453,6 @@ var User = function User() {
     setIsCreate(true);
   };
 
-  var setIsLoadingTrue = function setIsLoadingTrue() {
-    setIsLoading(true);
-  };
-
-  var setIsLoadingFalse = function setIsLoadingFalse() {
-    setIsLoading(false);
-  };
-
   react_1.useEffect(function () {
     getUsers();
   }, []);
@@ -2520,8 +2512,9 @@ var User = function User() {
     },
     className: "cmn_modal_inner_close"
   }, "\xD7"), react_1["default"].createElement(userCreate_1["default"], {
-    setIsLoadingTrue: setIsLoadingTrue,
-    setIsLoadingFalse: setIsLoadingFalse
+    setIsCreate: setIsCreate,
+    setIsLoading: setIsLoading,
+    getUsers: getUsers
   }))), react_1["default"].createElement("div", {
     className: isLoading ? 'react-loading-wrap show' : 'react-loading-wrap'
   }, react_1["default"].createElement(react_loading_1["default"], {
@@ -2604,8 +2597,9 @@ var userDefault = {
 };
 
 var UserCreate = function UserCreate(_a) {
-  var setIsLoadingTrue = _a.setIsLoadingTrue,
-      setIsLoadingFalse = _a.setIsLoadingFalse;
+  var setIsLoading = _a.setIsLoading,
+      getUsers = _a.getUsers,
+      setIsCreate = _a.setIsCreate;
   var inputRef = react_1["default"].useRef();
 
   var _b = react_1.useState(""),
@@ -2665,8 +2659,7 @@ var UserCreate = function UserCreate(_a) {
       salary: salary,
       file: file
     };
-    setIsLoadingTrue(); // this.$parent.loading = true;
-
+    setIsLoading(true);
     var postData = new FormData();
     postData.append("file", file);
     postData.append("img_name", img_name);
@@ -2676,24 +2669,17 @@ var UserCreate = function UserCreate(_a) {
     postData.append("salary", salary);
     axios_1["default"].post("/api/users", postData).then(function (res) {
       console.log(res.data);
-      setIsLoadingFalse(); // this.$parent.editmodal = false;
-      // this.$parent.getusers();
-      // this.$parent.loading = false;
+      setIsLoading(false);
+      getUsers();
+      setIsCreate(false);
     })["catch"](function (res) {
-      alert("エラーです"); // this.$parent.loading = false;
-
-      setIsLoadingFalse();
+      alert("エラーです");
+      setIsLoading(false);
     });
   };
 
   react_1.useEffect(function () {}, []);
-  return react_1["default"].createElement("div", {
-    className: ""
-  }, react_1["default"].createElement("button", {
-    onClick: setIsLoadingTrue
-  }, "\u304A\u3093"), react_1["default"].createElement("br", null), react_1["default"].createElement("br", null), react_1["default"].createElement("button", {
-    onClick: setIsLoadingFalse
-  }, "\u304A\u3075"), react_1["default"].createElement("form", {
+  return react_1["default"].createElement("form", {
     onSubmit: submit,
     className: "form"
   }, react_1["default"].createElement("div", {
@@ -2773,7 +2759,7 @@ var UserCreate = function UserCreate(_a) {
   }, react_1["default"].createElement("button", {
     type: "submit",
     className: "cmn_btn_sub"
-  }, "\u65B0\u898F\u767B\u9332"))));
+  }, "\u65B0\u898F\u767B\u9332")));
 };
 
 exports.default = UserCreate;
