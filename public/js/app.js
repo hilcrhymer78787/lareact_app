@@ -2356,6 +2356,40 @@ exports.default = Test3;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -2366,14 +2400,62 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_loading_1 = __importDefault(__webpack_require__(/*! react-loading */ "./node_modules/react-loading/dist/react-loading.js"));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var userCreate_1 = __importDefault(__webpack_require__(/*! ./userCreate */ "./resources/ts/pages/user/userCreate.tsx"));
+
+var initialState = [];
 
 var User = function User() {
+  var _a = react_1.useState(initialState),
+      users = _a[0],
+      setUsers = _a[1];
+
+  var _b = react_1.useState(true),
+      isLoading = _b[0],
+      setIsLoading = _b[1];
+
+  var _c = react_1.useState(false),
+      isShow = _c[0],
+      setIsShow = _c[1];
+
+  var _d = react_1.useState(false),
+      isCreate = _d[0],
+      setIsCreate = _d[1];
+
+  var getUsers = function getUsers() {
+    axios_1["default"].get("/api/users").then(function (res) {
+      setUsers(res.data);
+      setIsLoading(false);
+      setIsShow(true);
+    });
+  };
+
+  var deleteuser = function deleteuser(id, name) {
+    if (confirm("「" + name + "」を削除しますか？")) {
+      setIsLoading(true);
+      axios_1["default"]["delete"]("/api/users/" + id).then(function (res) {
+        getUsers();
+        setIsLoading(false);
+      });
+    }
+  };
+
+  var create = function create() {
+    setIsCreate(true);
+  };
+
+  react_1.useEffect(function () {
+    getUsers();
+  }, []);
   return react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
     className: "cmn_pageTitle"
   }, "\u51FA\u52E4\u8005\u4E00\u89A7"), react_1["default"].createElement("div", {
-    "v-show": "isShow",
-    className: "table"
+    className: isShow ? 'table show' : 'table'
   }, react_1["default"].createElement("ul", {
     className: "table_row ar"
   }, react_1["default"].createElement("li", {
@@ -2384,36 +2466,230 @@ var User = function User() {
     className: "table_row_list email d-none d-md-block"
   }, "\u30E1\u30FC\u30EB"), react_1["default"].createElement("li", {
     className: "table_row_list btn"
-  }, "\u3000")), react_1["default"].createElement("ul", {
-    "v-for": "user in users",
-    className: "table_row"
-  }, react_1["default"].createElement("li", {
-    className: "table_row_list img_name"
-  }, react_1["default"].createElement("img", {
-    "v-if": "user.img_name"
-  }), react_1["default"].createElement("img", {
-    "v-if": "!user.img_name",
-    src: "/assets/noimage.png"
-  })), react_1["default"].createElement("li", {
-    className: "table_row_list name"
-  }, "user.name"), react_1["default"].createElement("li", {
-    className: "table_row_list email d-none d-md-block"
-  }, "user.email"), react_1["default"].createElement("li", {
-    className: "table_row_list btn"
-  }, react_1["default"].createElement("button", {
-    className: "cmn_btn_sub mr-1"
-  }, "\u7DE8\u96C6"), react_1["default"].createElement("button", {
-    className: "cmn_btn_delete"
-  }, "\u524A\u9664")))), react_1["default"].createElement("div", {
+  }, "\u3000")), users.map(function (user, index) {
+    return react_1["default"].createElement("ul", {
+      className: "table_row",
+      key: index.toString()
+    }, react_1["default"].createElement("li", {
+      className: "table_row_list img_name"
+    }, react_1["default"].createElement("img", {
+      src: "/assets/noimage.png"
+    })), react_1["default"].createElement("li", {
+      className: "table_row_list name"
+    }, user.name), react_1["default"].createElement("li", {
+      className: "table_row_list email d-none d-md-block"
+    }, user.email), react_1["default"].createElement("li", {
+      className: "table_row_list btn"
+    }, react_1["default"].createElement("button", {
+      className: "cmn_btn_sub mr-1"
+    }, "\u7DE8\u96C6"), react_1["default"].createElement("button", {
+      className: "cmn_btn_delete",
+      onClick: function onClick() {
+        return deleteuser(user.id, user.name);
+      }
+    }, "\u524A\u9664")));
+  })), react_1["default"].createElement("div", {
     className: "footbar"
   }, react_1["default"].createElement("div", {
     className: "container"
   }, react_1["default"].createElement("button", {
-    className: "footbar_btn"
-  }, "\u65B0\u898F\u767B\u9332"))));
+    className: "footbar_btn",
+    onClick: function onClick() {
+      return create();
+    }
+  }, "\u65B0\u898F\u767B\u9332"))), react_1["default"].createElement("div", {
+    className: isCreate ? 'cmn_modal active' : 'cmn_modal'
+  }, react_1["default"].createElement("div", {
+    className: "cmn_modal_inner"
+  }, react_1["default"].createElement("div", {
+    onClick: function onClick() {
+      return setIsCreate(false);
+    },
+    className: "cmn_modal_inner_close"
+  }, "\xD7"), react_1["default"].createElement(userCreate_1["default"], null))), react_1["default"].createElement("div", {
+    className: isLoading ? 'react-loading-wrap show' : 'react-loading-wrap'
+  }, react_1["default"].createElement(react_loading_1["default"], {
+    type: "spin",
+    color: "black",
+    height: 100,
+    width: 100
+  })));
 };
 
 exports.default = User;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/user/userCreate.tsx":
+/*!************************************************!*\
+  !*** ./resources/ts/pages/user/userCreate.tsx ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var userDefault = {
+  id: 0,
+  img_name: "",
+  name: "",
+  email: "",
+  password: "",
+  salary: ""
+};
+
+var UserCreate = function UserCreate() {
+  var _a = react_1.useState(userDefault),
+      user = _a[0],
+      setuser = _a[1];
+
+  var _b = react_1.useState(""),
+      uploadedImage = _b[0],
+      setUploadedImage = _b[1];
+
+  var _c = react_1.useState(""),
+      file = _c[0],
+      setFile = _c[1]; // const [isLoading, setIsLoading] = useState(true)
+  // const [isShow, setIsShow] = useState(false)
+  // const getUsers = () => {
+  //     axios.get("/api/users").then((res) => {
+  //         setUsers(res.data);
+  //         setIsLoading(false);
+  //         setIsShow(true);
+  //     });
+  // }
+  // const deleteuser = (id: number, name: string) => {
+  //     if (confirm("「" + name + "」を削除しますか？")) {
+  //         setIsLoading(true);
+  //         axios.delete("/api/users/" + id).then((res) => {
+  //             getUsers();
+  //             setIsLoading(false);
+  //         });
+  //     }
+  // }
+
+
+  var previewImg = function previewImg() {};
+
+  var fileSelected = function fileSelected() {
+    alert();
+  };
+
+  react_1.useEffect(function () {// getUsers()
+  }, []);
+  return react_1["default"].createElement("form", {
+    className: "form"
+  }, react_1["default"].createElement("div", {
+    className: "form_ttl"
+  }, "\u51FA\u52E4\u8005\u767B\u9332"), react_1["default"].createElement("ul", {
+    className: "form_list"
+  }, react_1["default"].createElement("li", {
+    className: "form_list_item"
+  }, react_1["default"].createElement("dt", {
+    className: "form_list_item_ttl"
+  }, "\u753B\u50CF"), react_1["default"].createElement("dd", {
+    className: "form_list_item_main"
+  }, react_1["default"].createElement("img", {
+    onClick: function onClick() {
+      return previewImg();
+    },
+    src: uploadedImage
+  })), react_1["default"].createElement("input", {
+    className: "d-none",
+    type: "file",
+    accept: "image/*",
+    onChange: function onChange() {
+      return fileSelected();
+    }
+  })), react_1["default"].createElement("li", {
+    className: "form_list_item"
+  }, react_1["default"].createElement("dt", {
+    className: "form_list_item_ttl"
+  }, "\u540D\u524D"), react_1["default"].createElement("dd", {
+    className: "form_list_item_main"
+  }, react_1["default"].createElement("input", {
+    type: "text"
+  })), react_1["default"].createElement("div", {
+    className: "error"
+  }, "\u540D\u524D\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044")), react_1["default"].createElement("li", {
+    className: "form_list_item"
+  }, react_1["default"].createElement("dt", {
+    className: "form_list_item_ttl"
+  }, "\u30E1\u30FC\u30EB"), react_1["default"].createElement("dd", {
+    className: "form_list_item_main"
+  }, react_1["default"].createElement("input", {
+    type: "text"
+  })), react_1["default"].createElement("div", {
+    className: "error"
+  }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3092\u9069\u5207\u306A\u5F62\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044")), react_1["default"].createElement("li", {
+    className: "form_list_item"
+  }, react_1["default"].createElement("dt", {
+    className: "form_list_item_ttl"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("dd", {
+    className: "form_list_item_main"
+  }, react_1["default"].createElement("input", {
+    type: "text"
+  })), react_1["default"].createElement("div", {
+    className: "error"
+  }, "\u30D1\u30B9\u30EF\u30FC\u30C9\u30928\u6587\u5B57\u4EE5\u4E0A\u306E\u82F1\u6570\u5B57\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044")), react_1["default"].createElement("li", {
+    className: "form_list_item"
+  }, react_1["default"].createElement("dt", {
+    className: "form_list_item_ttl"
+  }, "\u65E5\u7D66"), react_1["default"].createElement("dd", {
+    className: "form_list_item_main"
+  }, react_1["default"].createElement("input", {
+    type: "text"
+  })), react_1["default"].createElement("div", {
+    className: "error"
+  }, "\u65E5\u7D66\u3092\u6570\u5024\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"))), react_1["default"].createElement("div", {
+    className: "form_btn"
+  }, react_1["default"].createElement("button", {
+    type: "submit",
+    className: "cmn_btn_sub"
+  }, "\u65B0\u898F\u767B\u9332")));
+};
+
+exports.default = UserCreate;
 
 /***/ }),
 

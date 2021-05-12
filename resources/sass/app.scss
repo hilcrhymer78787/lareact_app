@@ -294,8 +294,8 @@ body {
 .container {
     max-width: 900px;
 }
-.vue-loading-wrap {
-    display: flex;
+.react-loading-wrap {
+    display: none;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -304,7 +304,8 @@ body {
     bottom: 0;
     left: 0;
     z-index: 100;
-    .vue-loading {
+    &.show{
+        display: flex;
     }
 }
 .router-link-active {
@@ -629,8 +630,12 @@ input[type="radio"]:checked:before {
     /* user
 --------------------------------------------- */
 .table {
+    display: none;
     background-color: white;
     box-shadow: 0 0 10px #636363;
+    &.show{
+        display: block;
+    }
     &_row {
         display: flex;
         align-items: center;
@@ -709,6 +714,91 @@ input[type="radio"]:checked:before {
     .footbar {
         .container {
             justify-content: flex-end;
+        }
+    }
+}
+
+// user create
+.error {
+    color: red;
+    position: relative;
+    bottom: 8px;
+}
+.form {
+    height: 100%;
+    padding-top: 50px;
+    &_ttl {
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    &_list {
+        &_item {
+            font-size: 15px;
+            margin-bottom: 10px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            &_ttl {
+            }
+            &_main {
+                input {
+                    border: 1px solid gray;
+                    border-radius: 5px;
+                    width: 100%;
+                    padding: 5px;
+                    &.ar {
+                        padding: 0;
+                        border: none;
+                    }
+                }
+                img {
+                    width: 70px;
+                    height: 70px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    &_btn {
+        padding: 15px 0 50px;
+        text-align: right;
+    }
+}
+@media (min-width: 768px) {
+    .error {
+        padding: 5px;
+    }
+    .form {
+        &_ttl {
+            font-size: 35px;
+            margin-bottom: 25px;
+        }
+        &_list {
+            &_item {
+                display: flex;
+                flex-wrap: wrap;
+                width: 500px;
+                &_ttl {
+                    width: 30%;
+                    padding: 5px;
+                }
+                &_main {
+                    width: 70%;
+                    input {
+                        &.ar {
+                            padding: 5px;
+                        }
+                    }
+                    img {
+                        width: 120px;
+                        height: 120px;
+                    }
+                }
+            }
+        }
+        &_btn {
         }
     }
 }

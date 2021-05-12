@@ -10351,8 +10351,8 @@ body {
   max-width: 900px;
 }
 
-.vue-loading-wrap {
-  display: flex;
+.react-loading-wrap {
+  display: none;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -10362,6 +10362,10 @@ body {
   left: 0;
   z-index: 100;
 }
+.react-loading-wrap.show {
+  display: flex;
+}
+
 .router-link-active {
   color: #f3920b !important;
 }
@@ -10694,8 +10698,12 @@ input[type=radio]:checked:before {
 /* user
 --------------------------------------------- */
 .table {
+  display: none;
   background-color: white;
   box-shadow: 0 0 10px #636363;
+}
+.table.show {
+  display: block;
 }
 .table_row {
   display: flex;
@@ -10770,5 +10778,77 @@ input[type=radio]:checked:before {
 
   .footbar .container {
     justify-content: flex-end;
+  }
+}
+.error {
+  color: red;
+  position: relative;
+  bottom: 8px;
+}
+
+.form {
+  height: 100%;
+  padding-top: 50px;
+}
+.form_ttl {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.form_list_item {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.form_list_item:last-child {
+  margin-bottom: 0;
+}
+.form_list_item_main input {
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px;
+}
+.form_list_item_main input.ar {
+  padding: 0;
+  border: none;
+}
+.form_list_item_main img {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+.form_btn {
+  padding: 15px 0 50px;
+  text-align: right;
+}
+
+@media (min-width: 768px) {
+  .error {
+    padding: 5px;
+  }
+
+  .form_ttl {
+    font-size: 35px;
+    margin-bottom: 25px;
+  }
+  .form_list_item {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+  }
+  .form_list_item_ttl {
+    width: 30%;
+    padding: 5px;
+  }
+  .form_list_item_main {
+    width: 70%;
+  }
+  .form_list_item_main input.ar {
+    padding: 5px;
+  }
+  .form_list_item_main img {
+    width: 120px;
+    height: 120px;
   }
 }
