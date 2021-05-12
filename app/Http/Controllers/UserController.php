@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function store(Request $request, User $user)
     {
-        if(isset($request->file)){
+        if(isset($request->img_name)){
             $request->file->storeAs('public/', $request->img_name);
             $user["img_name"] = $request->img_name;
         }

@@ -720,9 +720,13 @@ input[type="radio"]:checked:before {
 
 // user create
 .error {
+    display: none;
     color: red;
     position: relative;
     bottom: 8px;
+    &.show{
+        display: block;
+    }
 }
 .form {
     height: 100%;

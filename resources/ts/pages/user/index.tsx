@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactLoading from 'react-loading';
 import UserCreate from './userCreate';
+import UserEdit from './userEdit';
 import axios from 'axios';
 
 
@@ -20,6 +21,7 @@ const User: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [isShow, setIsShow] = useState(false)
     const [isCreate, setIsCreate] = useState(false)
+    const [isEdit, setIsEdit] = useState(false)
 
     const getUsers = () => {
         axios.get("/api/users").then((res) => {
@@ -71,7 +73,7 @@ const User: React.FC = () => {
                         <li className="table_row_list name">{user.name}</li>
                         <li className="table_row_list email d-none d-md-block">{user.email}</li>
                         <li className="table_row_list btn">
-                            <button className="cmn_btn_sub mr-1">編集</button>
+                            <button className="cmn_btn_sub mr-1" onClick={() => setIsEdit(true)}>編集</button>
                             <button className="cmn_btn_delete" onClick={() => deleteuser(user.id, user.name)}>削除</button>
                         </li>
                     </ul>
@@ -88,6 +90,13 @@ const User: React.FC = () => {
                 <div className="cmn_modal_inner">
                     <div onClick={() => setIsCreate(false)} className="cmn_modal_inner_close">×</div>
                     <UserCreate setIsCreate={setIsCreate} setIsLoading={setIsLoading} getUsers={getUsers}/>
+                </div>
+            </div>
+
+            <div className={isEdit ? 'cmn_modal active' : 'cmn_modal'}>
+                <div className="cmn_modal_inner">
+                    <div onClick={() => setIsEdit(false)} className="cmn_modal_inner_close">×</div>
+                    <UserEdit setIsEdit={setIsEdit} setIsLoading={setIsLoading} getUsers={getUsers}/>
                 </div>
             </div>
 

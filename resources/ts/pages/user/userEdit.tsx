@@ -18,22 +18,17 @@ const userDefault: userType = {
     salary: "",
 }
 
-const UserCreate: React.FC = ({ setIsLoading, getUsers, setIsCreate }: any) => {
+const UserCreate: React.FC = ({setIsLoading, getUsers, setIsCreate}:any) => {
 
     const inputRef: any = React.useRef()
 
     const [name, setName] = useState("")
-    const [name_error, setNameError] = useState(false)
     const [email, setEmail] = useState("")
-    const [email_error, setEmailError] = useState(false)
     const [password, setPassword] = useState("")
-    const [password_error, setPasswordError] = useState(false)
     const [salary, setSalary] = useState("")
-    const [salary_error, setSalaryError] = useState(false)
     const [img_name, setImgName] = useState("")
 
     const [uploadedImage, setUploadedImage] = useState("")
-    // const [file, setFile] = useState(new Blob)
     const [file, setFile] = useState(new Blob)
 
     const noImage = (e: any): void => {
@@ -56,55 +51,37 @@ const UserCreate: React.FC = ({ setIsLoading, getUsers, setIsCreate }: any) => {
 
     const submit = (e: any): void => {
         e.preventDefault();
-        if (validation()) {
-            setIsLoading(true)
-            let postData = new FormData()
-            postData.append("file", file)
-            postData.append("img_name", img_name)
-            postData.append("name", name)
-            postData.append("email", email)
-            postData.append("password", password)
-            postData.append("salary", salary)
-            axios
-                .post("/api/users", postData)
-                .then((res) => {
-                    setIsLoading(false);
-                    getUsers()
-                    setIsCreate(false)
-                    console.log(res.data)
-                })
-                .catch((res) => {
-                    alert("エラーです");
-                    setIsLoading(false);
-                })
+        const user = {
+            name: name,
+            email: email,
+            password: password,
+            salary: salary,
+            file: file,
         }
-    }
 
-    const validation = (): boolean => {
-        let noProblem = true;
-        setNameError(false)
-        if (name === "") {
-            setNameError(true)
-            noProblem = false
-        }
-        setEmailError(false)
-        if (!/^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(email)) {
-            setEmailError(true)
-            noProblem = false
-        }
-        setPasswordError(false)
-        if (!/^([a-zA-Z0-9]{8,})$/.test(password)) {
-            setPasswordError(true)
-            noProblem = false
-        }
-        setSalaryError(false)
-        if (!/^([1-9]\d*|0)$/.test(salary)) {
-            setSalaryError(true)
-            noProblem = false
-        }
-        return noProblem;
-    }
+        
+        setIsLoading(true)
+        let postData = new FormData()
+        postData.append("file", file)
+        postData.append("img_name", img_name)
+        postData.append("name", name)
+        postData.append("email", email)
+        postData.append("password", password)
+        postData.append("salary", salary)
+        axios
+            .post("/api/users", postData)
+            .then((res) => {
+                console.log(res.data)
+                setIsLoading(false);
+                getUsers()
+                setIsCreate(false)
+            })
+            .catch((res) => {
+                alert("エラーです");
+                setIsLoading(false);
+            })
 
+    }
     useEffect(() => {
     }, [])
 
@@ -122,22 +99,22 @@ const UserCreate: React.FC = ({ setIsLoading, getUsers, setIsCreate }: any) => {
                 <li className="form_list_item">
                     <dt className="form_list_item_ttl">名前</dt>
                     <dd className="form_list_item_main"><input type="text" onChange={(e) => setName(e.target.value)} /></dd>
-                    <div className={name_error ? 'error show' : 'error'}>名前を入力してください</div>
+                    <div className="error">名前を入力してください</div>
                 </li>
                 <li className="form_list_item">
                     <dt className="form_list_item_ttl">メール</dt>
                     <dd className="form_list_item_main"><input type="text" onChange={(e) => setEmail(e.target.value)} /></dd>
-                    <div className={email_error ? 'error show' : 'error'}>メールアドレスを適切な形で入力してください</div>
+                    <div className="error">メールアドレスを適切な形で入力してください</div>
                 </li>
                 <li className="form_list_item">
                     <dt className="form_list_item_ttl">パスワード</dt>
                     <dd className="form_list_item_main"><input type="text" onChange={(e) => setPassword(e.target.value)} /></dd>
-                    <div className={password_error ? 'error show' : 'error'}>パスワードを8文字以上の英数字で入力してください</div>
+                    <div className="error">パスワードを8文字以上の英数字で入力してください</div>
                 </li>
                 <li className="form_list_item">
                     <dt className="form_list_item_ttl">日給</dt>
                     <dd className="form_list_item_main"><input type="text" onChange={(e) => setSalary(e.target.value)} /></dd>
-                    <div className={salary_error ? 'error show' : 'error'}>日給を数値で入力してください</div>
+                    <div className="error">日給を数値で入力してください</div>
                 </li>
             </ul>
             <div className="form_btn">
