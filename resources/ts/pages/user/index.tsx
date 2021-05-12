@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactLoading from 'react-loading';
-import axios from 'axios';
 import UserCreate from './userCreate';
+import axios from 'axios';
 
 
 type userType = {
@@ -9,6 +9,7 @@ type userType = {
     name: string
     email: string
     salary: number
+    img_name:string
 }
 
 const initialState: userType[] = []
@@ -36,6 +37,11 @@ const User: React.FC = () => {
                 setIsLoading(false);
             });
         }
+
+    }
+
+    const noImage = (e: any): void => {
+        e.target.src = "/assets/noimage.png";
     }
 
     const create = () => {
@@ -60,7 +66,7 @@ const User: React.FC = () => {
                 {users.map((user, index) => (
                     <ul className="table_row" key={index.toString()}>
                         <li className="table_row_list img_name">
-                            <img src="/assets/noimage.png" />
+                            <img onError={noImage} src={'/storage/' + user.img_name}/>
                         </li>
                         <li className="table_row_list name">{user.name}</li>
                         <li className="table_row_list email d-none d-md-block">{user.email}</li>
@@ -81,7 +87,7 @@ const User: React.FC = () => {
             <div className={isCreate ? 'cmn_modal active' : 'cmn_modal'}>
                 <div className="cmn_modal_inner">
                     <div onClick={() => setIsCreate(false)} className="cmn_modal_inner_close">×</div>
-                    <UserCreate />
+                    <UserCreate/>
                 </div>
             </div>
 

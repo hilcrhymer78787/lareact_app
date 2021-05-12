@@ -32,8 +32,6 @@ class UserController extends Controller
         $user["salary"] = $request->salary;
         $user["img_name"] = $request->img_name;
         $user->save();
-
-        return $user;
     }
     public function update(Request $request, User $user)
     {
