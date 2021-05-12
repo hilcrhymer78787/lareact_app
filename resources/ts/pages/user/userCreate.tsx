@@ -18,7 +18,7 @@ const userDefault: userType = {
     salary: "",
 }
 
-const UserCreate: React.FC = () => {
+const UserCreate: React.FC = ({setIsLoadingTrue, setIsLoadingFalse}:any) => {
 
     const inputRef: any = React.useRef()
 
@@ -60,6 +60,7 @@ const UserCreate: React.FC = () => {
         }
 
         
+        setIsLoadingTrue();
         // this.$parent.loading = true;
         let postData = new FormData()
         postData.append("file", file)
@@ -72,7 +73,7 @@ const UserCreate: React.FC = () => {
             .post("/api/users", postData)
             .then((res) => {
                 console.log(res.data)
-                
+                setIsLoadingFalse();
                 // this.$parent.editmodal = false;
                 // this.$parent.getusers();
                 // this.$parent.loading = false;
@@ -80,11 +81,20 @@ const UserCreate: React.FC = () => {
             .catch((res) => {
                 alert("エラーです");
                 // this.$parent.loading = false;
+                setIsLoadingFalse();
             });
 
     }
+    useEffect(() => {
+    }, [])
 
     return (
+        <div className="">
+        <button onClick={setIsLoadingTrue}>おん</button>
+        <br />
+        <br />
+        <button onClick={setIsLoadingFalse}>おふ</button>
+
         <form onSubmit={submit} className="form">
             <div className="form_ttl">出勤者登録</div>
             <ul className="form_list">
@@ -120,6 +130,8 @@ const UserCreate: React.FC = () => {
                 <button type="submit" className="cmn_btn_sub">新規登録</button>
             </div>
         </form>
+        </div>
+
     )
 }
 

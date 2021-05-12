@@ -48,6 +48,14 @@ const User: React.FC = () => {
         setIsCreate(true)
     }
 
+    const setIsLoadingTrue = () => {
+        setIsLoading(true)
+    }
+
+    const setIsLoadingFalse = () => {
+        setIsLoading(false)
+    }
+
     useEffect(() => {
         getUsers()
     }, [])
@@ -87,7 +95,7 @@ const User: React.FC = () => {
             <div className={isCreate ? 'cmn_modal active' : 'cmn_modal'}>
                 <div className="cmn_modal_inner">
                     <div onClick={() => setIsCreate(false)} className="cmn_modal_inner_close">×</div>
-                    <UserCreate/>
+                    <UserCreate setIsLoadingTrue={setIsLoadingTrue} setIsLoadingFalse={setIsLoadingFalse}/>
                 </div>
             </div>
 

@@ -2453,6 +2453,14 @@ var User = function User() {
     setIsCreate(true);
   };
 
+  var setIsLoadingTrue = function setIsLoadingTrue() {
+    setIsLoading(true);
+  };
+
+  var setIsLoadingFalse = function setIsLoadingFalse() {
+    setIsLoading(false);
+  };
+
   react_1.useEffect(function () {
     getUsers();
   }, []);
@@ -2511,7 +2519,10 @@ var User = function User() {
       return setIsCreate(false);
     },
     className: "cmn_modal_inner_close"
-  }, "\xD7"), react_1["default"].createElement(userCreate_1["default"], null))), react_1["default"].createElement("div", {
+  }, "\xD7"), react_1["default"].createElement(userCreate_1["default"], {
+    setIsLoadingTrue: setIsLoadingTrue,
+    setIsLoadingFalse: setIsLoadingFalse
+  }))), react_1["default"].createElement("div", {
     className: isLoading ? 'react-loading-wrap show' : 'react-loading-wrap'
   }, react_1["default"].createElement(react_loading_1["default"], {
     type: "spin",
@@ -2592,36 +2603,38 @@ var userDefault = {
   salary: ""
 };
 
-var UserCreate = function UserCreate() {
+var UserCreate = function UserCreate(_a) {
+  var setIsLoadingTrue = _a.setIsLoadingTrue,
+      setIsLoadingFalse = _a.setIsLoadingFalse;
   var inputRef = react_1["default"].useRef();
 
-  var _a = react_1.useState(""),
-      name = _a[0],
-      setName = _a[1];
-
   var _b = react_1.useState(""),
-      email = _b[0],
-      setEmail = _b[1];
+      name = _b[0],
+      setName = _b[1];
 
   var _c = react_1.useState(""),
-      password = _c[0],
-      setPassword = _c[1];
+      email = _c[0],
+      setEmail = _c[1];
 
   var _d = react_1.useState(""),
-      salary = _d[0],
-      setSalary = _d[1];
+      password = _d[0],
+      setPassword = _d[1];
 
   var _e = react_1.useState(""),
-      img_name = _e[0],
-      setImgName = _e[1];
+      salary = _e[0],
+      setSalary = _e[1];
 
   var _f = react_1.useState(""),
-      uploadedImage = _f[0],
-      setUploadedImage = _f[1];
+      img_name = _f[0],
+      setImgName = _f[1];
 
-  var _g = react_1.useState(new Blob()),
-      file = _g[0],
-      setFile = _g[1];
+  var _g = react_1.useState(""),
+      uploadedImage = _g[0],
+      setUploadedImage = _g[1];
+
+  var _h = react_1.useState(new Blob()),
+      file = _h[0],
+      setFile = _h[1];
 
   var noImage = function noImage(e) {
     e.target.src = "/assets/noimage.png";
@@ -2651,7 +2664,8 @@ var UserCreate = function UserCreate() {
       password: password,
       salary: salary,
       file: file
-    }; // this.$parent.loading = true;
+    };
+    setIsLoadingTrue(); // this.$parent.loading = true;
 
     var postData = new FormData();
     postData.append("file", file);
@@ -2661,15 +2675,25 @@ var UserCreate = function UserCreate() {
     postData.append("password", password);
     postData.append("salary", salary);
     axios_1["default"].post("/api/users", postData).then(function (res) {
-      console.log(res.data); // this.$parent.editmodal = false;
+      console.log(res.data);
+      setIsLoadingFalse(); // this.$parent.editmodal = false;
       // this.$parent.getusers();
       // this.$parent.loading = false;
     })["catch"](function (res) {
       alert("エラーです"); // this.$parent.loading = false;
+
+      setIsLoadingFalse();
     });
   };
 
-  return react_1["default"].createElement("form", {
+  react_1.useEffect(function () {}, []);
+  return react_1["default"].createElement("div", {
+    className: ""
+  }, react_1["default"].createElement("button", {
+    onClick: setIsLoadingTrue
+  }, "\u304A\u3093"), react_1["default"].createElement("br", null), react_1["default"].createElement("br", null), react_1["default"].createElement("button", {
+    onClick: setIsLoadingFalse
+  }, "\u304A\u3075"), react_1["default"].createElement("form", {
     onSubmit: submit,
     className: "form"
   }, react_1["default"].createElement("div", {
@@ -2749,7 +2773,7 @@ var UserCreate = function UserCreate() {
   }, react_1["default"].createElement("button", {
     type: "submit",
     className: "cmn_btn_sub"
-  }, "\u65B0\u898F\u767B\u9332")));
+  }, "\u65B0\u898F\u767B\u9332"))));
 };
 
 exports.default = UserCreate;
