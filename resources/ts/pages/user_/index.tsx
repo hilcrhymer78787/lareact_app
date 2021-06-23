@@ -23,7 +23,7 @@ const User: React.FC = () => {
     const [isCreate, setIsCreate] = useState(false)
     const [isEdit, setIsEdit] = useState(false)
 
-    const getUsers = () => {
+    const getUsers = (): void => {
         axios.get("/api/users").then((res) => {
             setUsers(res.data);
             setIsLoading(false);
@@ -39,7 +39,6 @@ const User: React.FC = () => {
                 setIsLoading(false);
             });
         }
-
     }
 
     const noImage = (e: any): void => {
@@ -89,21 +88,20 @@ const User: React.FC = () => {
             <div className={isCreate ? 'cmn_modal active' : 'cmn_modal'}>
                 <div className="cmn_modal_inner">
                     <div onClick={() => setIsCreate(false)} className="cmn_modal_inner_close">×</div>
-                    <UserCreate setIsCreate={setIsCreate} setIsLoading={setIsLoading} getUsers={getUsers}/>
+                    <UserCreate/>
                 </div>
             </div>
 
             <div className={isEdit ? 'cmn_modal active' : 'cmn_modal'}>
                 <div className="cmn_modal_inner">
                     <div onClick={() => setIsEdit(false)} className="cmn_modal_inner_close">×</div>
-                    <UserEdit setIsEdit={setIsEdit} setIsLoading={setIsLoading} getUsers={getUsers}/>
+                    <UserEdit/>
                 </div>
             </div>
 
             <div className={isLoading ? 'react-loading-wrap show' : 'react-loading-wrap'}>
                 <ReactLoading type="spin" color="black" height={100} width={100} />
             </div>
-
         </div >
     )
 }
