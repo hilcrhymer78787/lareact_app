@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReactLoading from 'react-loading';
-import UserCreate from './userCreate';
 import UserEdit from './userEdit';
 import axios from 'axios';
 
@@ -85,17 +84,10 @@ const User: React.FC = () => {
                 </div>
             </div>
 
-            <div className={isCreate ? 'cmn_modal active' : 'cmn_modal'}>
-                <div className="cmn_modal_inner">
-                    <div onClick={() => setIsCreate(false)} className="cmn_modal_inner_close">×</div>
-                    <UserCreate/>
-                </div>
-            </div>
-
             <div className={isEdit ? 'cmn_modal active' : 'cmn_modal'}>
                 <div className="cmn_modal_inner">
                     <div onClick={() => setIsEdit(false)} className="cmn_modal_inner_close">×</div>
-                    <UserEdit/>
+                    <UserEdit setIsLoading={setIsLoading}/>
                 </div>
             </div>
 

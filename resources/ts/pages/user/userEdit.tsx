@@ -18,7 +18,7 @@ const userDefault: userType = {
     salary: "",
 }
 
-const UserCreate: React.FC = ({setIsLoading, getUsers, setIsCreate}:any) => {
+const userEdit: React.FC = ({ setIsLoading, getUsers, setIsCreate }: any) => {
 
     const inputRef: any = React.useRef()
 
@@ -59,7 +59,6 @@ const UserCreate: React.FC = ({setIsLoading, getUsers, setIsCreate}:any) => {
             file: file,
         }
 
-        
         setIsLoading(true)
         let postData = new FormData()
         postData.append("file", file)
@@ -126,4 +125,4 @@ const UserCreate: React.FC = ({setIsLoading, getUsers, setIsCreate}:any) => {
     )
 }
 
-export default UserCreate;
+export default userEdit;
