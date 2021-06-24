@@ -34,7 +34,8 @@ const App: React.FC = () => {
                                 </div>
                             </div>
                             <div className="header_nav d-md-flex justify-content-center">
-                                <Link to="/web/user_">user</Link>
+                                <Link to="/web/user">user</Link>
+                                <Link to="/web/user_">user_</Link>
                                 <Link to="/web/place">place</Link>
                                 <Link to="/web/test1">test1</Link>
                                 <Link to="/web/test2">test2</Link>
@@ -54,6 +55,9 @@ const App: React.FC = () => {
                         </Route>
                         <Route path="/web/test3">
                             <Test3 />
+                        </Route>
+                        <Route path="/web/user">
+                            <User />
                         </Route>
                         <Route path="/web/user_">
                             <User />
