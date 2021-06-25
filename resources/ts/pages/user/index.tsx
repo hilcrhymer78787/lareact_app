@@ -9,7 +9,7 @@ type userType = {
     name: string
     email: string
     salary: number
-    img_name:string
+    img_name: string
 }
 
 const initialState: userType[] = []
@@ -17,9 +17,9 @@ const initialState: userType[] = []
 const User: React.FC = () => {
 
     const [users, setUsers] = useState(initialState)
+    const [editUser, setEditUser] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [isShow, setIsShow] = useState(false)
-    const [isCreate, setIsCreate] = useState(false)
     const [isEdit, setIsEdit] = useState(false)
 
     const getUsers = (): void => {
@@ -27,6 +27,7 @@ const User: React.FC = () => {
             setUsers(res.data);
             setIsLoading(false);
             setIsShow(true);
+            console.log(res.data)
         });
     }
 
@@ -44,8 +45,9 @@ const User: React.FC = () => {
         e.target.src = "/assets/noimage.png";
     }
 
-    const create = () => {
-        setIsCreate(true)
+    const edit = (user: any | userType | null) => {
+        setEditUser(user)
+        setIsEdit(true)
     }
 
     useEffect(() => {
@@ -66,12 +68,12 @@ const User: React.FC = () => {
                 {users.map((user, index) => (
                     <ul className="table_row" key={index.toString()}>
                         <li className="table_row_list img_name">
-                            <img onError={noImage} src={'/storage/' + user.img_name}/>
+                            <img onError={noImage} src={'/storage/' + user.img_name} />
                         </li>
                         <li className="table_row_list name">{user.name}</li>
                         <li className="table_row_list email d-none d-md-block">{user.email}</li>
                         <li className="table_row_list btn">
-                            <button className="cmn_btn_sub mr-1" onClick={() => setIsEdit(true)}>編集</button>
+                            <button className="cmn_btn_sub mr-1" onClick={() => edit(user)}>編集</button>
                             <button className="cmn_btn_delete" onClick={() => deleteuser(user.id, user.name)}>削除</button>
                         </li>
                     </ul>
@@ -80,14 +82,13 @@ const User: React.FC = () => {
 
             <div className="footbar">
                 <div className="container">
-                    <button className="footbar_btn" onClick={() => create()}>新規登録</button>
+                    <button className="footbar_btn" onClick={() => edit(null)}>新規登録</button>
                 </div>
             </div>
 
             <div className={isEdit ? 'cmn_modal active' : 'cmn_modal'}>
                 <div className="cmn_modal_inner">
-                    <div onClick={() => setIsEdit(false)} className="cmn_modal_inner_close">×</div>
-                    <UserEdit setIsLoading={setIsLoading}/>
+                    <UserEdit editUser={editUser} setIsEdit={setIsEdit} setIsLoading={setIsLoading} getUsers={getUsers} />
                 </div>
             </div>
 
